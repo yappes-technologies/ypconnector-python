@@ -50,7 +50,7 @@ setup.py
 test.py
 ypconnect_test.py
 ypconnector.egg-info/
-
+ypconnector_python.egg-info/
 
 # sublime
 *.sublime-project
