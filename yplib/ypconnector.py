@@ -1,14 +1,9 @@
-import http.client
 import json
 from urllib.parse import urlparse
-import urllib.request
 import sys
-import json
 import requests
 
 
-
-#print(urlparse.urlunparse(url_parts))
 responseSchema = {"headers": "", "statusCode": "", "statusMessage": "", "body": ""}
 
 class YappesLibrary:
