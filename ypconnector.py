@@ -6,6 +6,9 @@ import sys
 import json
 import requests
 
+
+
+#print(urlparse.urlunparse(url_parts))
 responseSchema = {"headers": "", "statusCode": "", "statusMessage": "", "body": ""}
 
 class YappesLibrary:
@@ -26,18 +29,13 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
-            if parameters["queryparams"] != "":
-                URL = apiUrl + "?" + parameters["queryparams"]
-            else:
-                URL = apiUrl
-            conn = requests.get(
-                URL, data=json.dumps(parameters["payload"]), headers=options["headers"]
+            conn = requests.get(apiUrl, data=json.dumps(parameters["payload"]),params=parameters["queryparams"],
+                headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
             responseSchema["statusMessage"] = conn.reason
             responseSchema["body"] = conn.text
-            print(responseSchema)
             return responseSchema
         except:
             print(sys.exc_info())
@@ -56,22 +54,16 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
-            if parameters["queryparams"] != "":
-                URL = apiUrl + "?" + parameters["queryparams"]
-            else:
-                URL = apiUrl
             conn = requests.post(
-                URL, data=json.dumps(parameters["payload"]), headers=options["headers"]
+                apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
             responseSchema["statusMessage"] = conn.reason
             responseSchema["body"] = conn.text
-            print(responseSchema)
             return responseSchema
         except:
             print(sys.exc_info())
-
     # put operation
     def put(self, apiUrl, parameters):
         try:
@@ -86,18 +78,13 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
-            if parameters["queryparams"] != "":
-                URL = apiUrl + "?" + parameters["queryparams"]
-            else:
-                URL = apiUrl
             conn = requests.put(
-                URL, data=json.dumps(parameters["payload"]), headers=options["headers"]
+                apiUrl, data=json.dumps(parameters["payload"]),params=parameters["queryparams"], headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
             responseSchema["statusMessage"] = conn.reason
             responseSchema["body"] = conn.text
-            print(responseSchema)
             return responseSchema
         except:
             print(sys.exc_info())
@@ -115,18 +102,13 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
-            if parameters["queryparams"] != "":
-                URL = apiUrl + "?" + parameters["queryparams"]
-            else:
-                URL = apiUrl
             conn = requests.delete(
-                URL, data=json.dumps(parameters["payload"]), headers=options["headers"]
+                apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
             responseSchema["statusMessage"] = conn.reason
             responseSchema["body"] = conn.text
-            print(responseSchema)
             return responseSchema
         except:
             print(sys.exc_info())
@@ -144,18 +126,13 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
-            if parameters["queryparams"] != "":
-                URL = apiUrl + "?" + parameters["queryparams"]
-            else:
-                URL = apiUrl
             conn = requests.patch(
-                URL, data=json.dumps(parameters["payload"]), headers=options["headers"]
+                apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
             responseSchema["statusMessage"] = conn.reason
             responseSchema["body"] = conn.text
-            print(responseSchema)
             return responseSchema
         except:
             print(sys.exc_info())
