@@ -5,12 +5,15 @@ import requests
 
 
 responseSchema = {"headers": "", "statusCode": "", "statusMessage": "", "body": ""}
-methodList=["GET","POST","PUT","DELETE","PATCH","get","post","put","delete","patch"]
+methodList=["get","post","put","delete","patch"]
+
 class YappesLibrary:
     def __init__(self, token):
         self.xyappeskey = token
-    #call Method (GET,POST,PUT,DELETE,PATCH)
+    #call Method (get,post,put,delete,patch)
     def call(self, apiUrl, parameters,method):
+        if method.isupper():
+            method=method.lower()
         try:        
             if method in methodList:
                 urlParts = urlparse(apiUrl)
@@ -32,6 +35,8 @@ class YappesLibrary:
                 responseSchema["statusMessage"] = conn.reason
                 responseSchema["body"] = conn.text
                 return responseSchema
+            else:
+                return "Error 405 Method Not Allowed"
         except:
             print(sys.exc_info())
 
