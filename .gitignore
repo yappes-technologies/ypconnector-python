@@ -45,8 +45,12 @@ Lib
 Scripts
 pip-selfcheck.json
 pyvenv.cfg
-
-
+dist/
+setup.py
+test.py
+ypconnect_test.py
+ypconnector.egg-info/
+ypconnector_python.egg-info/
 
 # sublime
 *.sublime-project
