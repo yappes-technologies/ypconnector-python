@@ -5,10 +5,40 @@ import requests
 
 
 responseSchema = {"headers": "", "statusCode": "", "statusMessage": "", "body": ""}
+methodList=["get","post","put","delete","patch"]
 
 class YappesLibrary:
     def __init__(self, token):
         self.xyappeskey = token
+    #call Method (get,post,put,delete,patch)
+    def call(self, apiUrl, parameters,method):
+        if method.isupper():
+            method=method.lower()
+        try:        
+            if method in methodList:
+                urlParts = urlparse(apiUrl)
+                options = {
+                    "host": urlParts.hostname,
+                    "path": urlParts.path,
+                    "port": urlParts.port,
+                    "method": method,
+                    "headers": parameters["headers"],
+                }
+                options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
+                if options["port"] is None:
+                    options["port"] = 443
+                conn = requests.request(method,
+                    apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
+                )
+                responseSchema["headers"] = conn.headers
+                responseSchema["statusCode"] = conn.status_code
+                responseSchema["statusMessage"] = conn.reason
+                responseSchema["body"] = conn.text
+                return responseSchema
+            else:
+                return "Error 405 Method Not Allowed"
+        except:
+            print(sys.exc_info())
 
     # get operation
     def get(self, apiUrl, parameters):
