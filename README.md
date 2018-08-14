@@ -11,7 +11,7 @@ pip install ypconnector
 ```
 Usage:
 ```
-from ypconnector import YappesLibrary
+from yplib.ypconnector import YappesLibrary
 
 //Yappes-Token obtained from yappes portal
 yappesToken = "YOUR X-YAPPES-KEY";
