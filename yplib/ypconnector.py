@@ -11,23 +11,25 @@ class YappesLibrary:
     def __init__(self, token):
         self.xyappeskey = token
     #call Method (get,post,put,delete,patch)
-    def call(self, apiUrl, parameters,method):
-        if method.isupper():
-            method=method.lower()
+    def call(self, apiUrl, parameters):
+        if "method" not in parameters:
+            return "Method not Available in parameters"
+        if parameters["method"].isupper():
+            parameters["method"]=parameters["method"].lower()
         try:        
-            if method in methodList:
+            if parameters["method"] in methodList:
                 urlParts = urlparse(apiUrl)
                 options = {
                     "host": urlParts.hostname,
                     "path": urlParts.path,
                     "port": urlParts.port,
-                    "method": method,
+                    "method": parameters["method"],
                     "headers": parameters["headers"],
                 }
                 options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
                 if options["port"] is None:
                     options["port"] = 443
-                conn = requests.request(method,
+                conn = requests.request(options["method"],
                     apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
                 )
                 responseSchema["headers"] = conn.headers
@@ -36,7 +38,7 @@ class YappesLibrary:
                 responseSchema["body"] = conn.text
                 return responseSchema
             else:
-                return "Error 405 Method Not Allowed"
+                return "Error 405 Unsupported Method/Method Not Allowed. Please refer read me section"
         except:
             print(sys.exc_info())
 
