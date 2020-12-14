@@ -29,8 +29,12 @@ class YappesLibrary:
                 options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
                 if options["port"] is None:
                     options["port"] = 443
+                if options["headers"]["Content-Type"]=='application/xml':
+                    data=parameters["payload"][list(parameters["payload"])[0]]
+                else:
+                    data=json.dumps(parameters["payload"])
                 conn = requests.request(options["method"],
-                    apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
+                    apiUrl, data, params=parameters["queryparams"],headers=options["headers"]
                 )
                 responseSchema["headers"] = conn.headers
                 responseSchema["statusCode"] = conn.status_code
@@ -81,8 +85,12 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
+            if options["headers"]["Content-Type"]=='application/xml':
+                data=parameters["payload"][list(parameters["payload"])[0]]
+            else:
+                data=json.dumps(parameters["payload"])
             conn = requests.post(
-                apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
+                apiUrl, data, params=parameters["queryparams"],headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
@@ -105,8 +113,12 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
+            if options["headers"]["Content-Type"]=='application/xml':
+                data=parameters["payload"][list(parameters["payload"])[0]]
+            else:
+                data=json.dumps(parameters["payload"])
             conn = requests.put(
-                apiUrl, data=json.dumps(parameters["payload"]),params=parameters["queryparams"], headers=options["headers"]
+                apiUrl, data,params=parameters["queryparams"], headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
@@ -129,8 +141,12 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
+            if options["headers"]["Content-Type"]=='application/xml':
+                data=parameters["payload"][list(parameters["payload"])[0]]
+            else:
+                data=json.dumps(parameters["payload"])
             conn = requests.delete(
-                apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
+                apiUrl, data, params=parameters["queryparams"],headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
@@ -153,8 +169,12 @@ class YappesLibrary:
             options["headers"]["X-YAPPES-KEY"] = self.xyappeskey
             if options["port"] is None:
                 options["port"] = 443
+            if options["headers"]["Content-Type"]=='application/xml':
+                data=parameters["payload"][list(parameters["payload"])[0]]
+            else:
+                data=json.dumps(parameters["payload"])
             conn = requests.patch(
-                apiUrl, data=json.dumps(parameters["payload"]), params=parameters["queryparams"],headers=options["headers"]
+                apiUrl, data, params=parameters["queryparams"],headers=options["headers"]
             )
             responseSchema["headers"] = conn.headers
             responseSchema["statusCode"] = conn.status_code
